@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="en" class="antialiased scroll-smooth">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Flexible Wear — Versatile Apparel for Schools, Corporates & You</title>
+    <meta name="description"
+        content="Flexible Wear — modern, versatile cardigans, joggers, hoodies and sportswear for schools, corporations and individuals. Fast, accessible and responsive site." />
+
+    <!-- Performance hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --brand: #0f766e;
+            --accent: #06b6d4;
+        }
+
+        html {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+        }
+
+        /* Smooth fade-in animation for sections */
+        .fade-in {
+            animation: fadeInUp .7s ease both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero underline animation */
+        .underline-anim {
+            position: relative;
+            display: inline-block;
+        }
+
+        .underline-anim::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -6px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--brand));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .35s ease;
+            border-radius: 8px;
+        }
+
+        .underline-anim:hover::after,
+        .underline-anim:focus::after {
+            transform: scaleX(1);
+        }
+
+        /* subtle card hover */
+        .card-hover:hover {
+            transform: translateY(-6px) scale(1.01);
+            transition: transform .25s ease;
+        }
+
+        /* accessible focus ring */
+        .focus-ring:focus {
+            outline: 3px solid rgba(6, 182, 212, 0.18);
+            outline-offset: 3px;
+        }
+
+        /* Light/dark preference */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                color-scheme: dark;
+            }
+        }
+    </style>
+
+    <!-- Meta for security hints (note: ensure SSL via hosting) -->
+    <!-- Important: Deploy this site over HTTPS (SSL). Use Let's Encrypt or your host's managed certificate. -->
+</head>
+
+<body class="bg-white text-slate-800 leading-relaxed">
+
+    <!-- Header / Nav -->
+    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur shadow-sm border-b" role="banner">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="#home" class="flex items-center gap-3 focus-ring" aria-label="Flexible Wear home">
+                    <!-- Logo (SVG) -->
+                    <svg class="w-10 h-10 rounded-lg p-1 bg-gradient-to-br from-emerald-700 to-cyan-500 text-white"
+                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect width="24" height="24" rx="6" fill="url(#g)" />
+                        <defs>
+                            <linearGradient id="g" x1="0" x2="1">
+                                <stop offset="0" stop-color="#059669" />
+                                <stop offset="1" stop-color="#06b6d4" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M7 16c0-2.5 2-4 5-4s5 1.5 5 4" stroke="white" stroke-width="1.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M12 8v-1" stroke="white" stroke-width="1.6" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <div class="text-sm font-semibold">
+                        <div>Flexible Wear</div>
+                        <div class="text-xs text-slate-500">comfortable. adaptable. intentional.</div>
+                    </div>
+                </a>
+
+                <nav class="hidden md:flex items-center gap-6" aria-label="Main navigation">
+                    <a href="#home" class="text-sm hover:text-slate-900 focus-ring">Home</a>
+                    <a href="#services" class="text-sm hover:text-slate-900 focus-ring">Services</a>
+                    <a href="#blog" class="text-sm hover:text-slate-900 focus-ring">Blog</a>
+                    <a href="#faq" class="text-sm hover:text-slate-900 focus-ring">FAQ</a>
+                    <a href="#contact" class="text-sm hover:text-slate-900 focus-ring">Contact</a>
+                </nav>
+
+                <div class="flex items-center gap-3">
+                    <button id="searchBtn" aria-label="Search site" class="p-2 rounded-md focus-ring">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 100-15 7.5 7.5 0 000 15z" />
+                        </svg>
+                    </button>
+                    <a href="#contact"
+                        class="hidden md:inline-block rounded-full bg-gradient-to-r from-emerald-600 to-cyan-500 text-white px-4 py-2 text-sm font-semibold shadow hover:opacity-95 focus-ring">Get
+                        a Quote</a>
+
+                    <!-- Mobile menu button -->
+                    <button id="menuBtn" class="md:hidden p-2 rounded-md focus-ring" aria-expanded="false"
+                        aria-controls="mobile-menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile nav -->
+        <div id="mobile-menu" class="md:hidden hidden border-t">
+            <div class="px-4 pt-4 pb-6 space-y-2">
+                <a href="#home" class="block px-2 py-2 rounded hover:bg-slate-50">Home</a>
+                <a href="#services" class="block px-2 py-2 rounded hover:bg-slate-50">Services</a>
+                <a href="#blog" class="block px-2 py-2 rounded hover:bg-slate-50">Blog</a>
+                <a href="#faq" class="block px-2 py-2 rounded hover:bg-slate-50">FAQ</a>
+                <a href="#contact" class="block px-2 py-2 rounded hover:bg-slate-50">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="home" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- HERO -->
+        <section class="grid md:grid-cols-2 gap-8 items-center">
+            <div class="space-y-6 fade-in">
+                <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">
+                    Versatile apparel for every moment
+                </h1>
+                <p class="text-lg text-slate-600 max-w-2xl">Flexible Wear designs adaptable cardigans, joggers, hoodies
+                    and sportswear — built for schools, corporations and people who value comfort without compromise.
+                </p>
+
+                <div class="flex flex-wrap gap-3">
+                    <a href="#services"
+                        class="rounded-full inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-emerald-600 to-cyan-500 text-white font-semibold shadow focus-ring">Explore
+                        Services</a>
+                    <a href="#contact"
+                        class="rounded-full inline-flex items-center gap-2 px-5 py-3 border border-slate-200 hover:border-slate-300 focus-ring">Contact
+                        Sales</a>
+                </div>
+
+                <div class="mt-2 text-sm text-slate-500">Free consultations for bulk orders • Quick sample delivery •
+                    Sustainable fabrics</div>
+
+                <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div class="text-center p-3 bg-slate-50 rounded card-hover">
+                        <div class="text-xs text-slate-500">Best Seller</div>
+                        <div class="font-semibold">Cardigans</div>
+                    </div>
+                    <div class="text-center p-3 bg-slate-50 rounded card-hover">
+                        <div class="text-xs text-slate-500">Comfy</div>
+                        <div class="font-semibold">Joggers</div>
+                    </div>
+                    <div class="text-center p-3 bg-slate-50 rounded card-hover">
+                        <div class="text-xs text-slate-500">Warm</div>
+                        <div class="font-semibold">Hoodies</div>
+                    </div>
+                    <div class="text-center p-3 bg-slate-50 rounded card-hover">
+                        <div class="text-xs text-slate-500">Active</div>
+                        <div class="font-semibold">Sportswear</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Hero image -->
+            <div class="rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-50 to-cyan-50 shadow-lg">
+                <picture>
+                    <source media="(min-width:1024px)"
+                        srcset="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=1200&q=60">
+                    <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=800&q=60"
+                        alt="Flexible Wear models showing different apparel styles" class="w-full h-80 object-cover"
+                        loading="lazy">
+                </picture>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="mt-12 fade-in" aria-labelledby="features-heading">
+            <div class="flex items-center justify-between">
+                <h2 id="features-heading" class="text-2xl font-semibold">Our Key Offerings</h2>
+                <div class="text-sm text-slate-500">Designed for scale — from single orders to school uniforms</div>
+            </div>
+
+            <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Cardigans -->
+                <article class="p-5 bg-white border rounded-lg shadow-sm card-hover" tabindex="0">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-md bg-emerald-50 grid place-items-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 7v6a4 4 0 004 4h8a4 4 0 004-4V7" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Custom Cardigans</h3>
+                            <p class="text-sm text-slate-500">Tailored fits, premium knits, and branding options for
+                                institutions and businesses.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Joggers -->
+                <article class="p-5 bg-white border rounded-lg shadow-sm card-hover" tabindex="0">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-md bg-cyan-50 grid place-items-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 13l2-2m0 0l7-7 7 7M13 21V9" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Comfort Joggers</h3>
+                            <p class="text-sm text-slate-500">Breathable fabrics, multiple fits, and eco-friendly
+                                material options.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Hoodies -->
+                <article class="p-5 bg-white border rounded-lg shadow-sm card-hover" tabindex="0">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-md bg-emerald-50 grid place-items-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 2v4m0 12v4m8-8h-4M4 12H0" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Signature Hoodies</h3>
+                            <p class="text-sm text-slate-500">Warmth, durability, and personalization for teams or
+                                retail.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Sportswear -->
+                <article class="p-5 bg-white border rounded-lg shadow-sm card-hover" tabindex="0">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-md bg-cyan-50 grid place-items-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 17v-6a4 4 0 018 0v6" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Performance Sportswear</h3>
+                            <p class="text-sm text-slate-500">Moisture-wicking, movement-friendly cuts for sports
+                                programs and teams.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- About + CTA strip -->
+        <section class="mt-12 grid lg:grid-cols-3 gap-6 items-center">
+            <div class="lg:col-span-2 bg-gradient-to-r from-emerald-50 to-cyan-50 p-6 rounded-lg fade-in">
+                <h3 class="text-xl font-semibold">About Flexible Wear</h3>
+                <p class="mt-3 text-slate-600">Founded to bridge the gap between style and function, Flexible Wear
+                    partners with schools, corporations, sports teams and individuals to deliver adaptable garments with
+                    ethical sourcing and careful design. Our mission is to make clothing that moves with you — and grows
+                    with your needs.</p>
+                <ul class="mt-4 space-y-2 text-sm text-slate-600">
+                    <li>• Bulk ordering & sample programs</li>
+                    <li>• Sustainable fabric options</li>
+                    <li>• End-to-end branding & packaging</li>
+                </ul>
+            </div>
+
+            <div class="p-6 bg-white border rounded-lg shadow-sm fade-in">
+                <h4 class="font-semibold">Quick CTA</h4>
+                <p class="text-sm text-slate-500 mt-2">Want a tailored quote or sample? Tell us your needs and we'll
+                    follow up within 1–2 business days.</p>
+                <a href="#contact"
+                    class="mt-4 inline-block rounded-md px-4 py-2 bg-emerald-600 text-white font-medium focus-ring">Request
+                    Samples</a>
+            </div>
+        </section>
+
+        <!-- Blog previews -->
+        <section id="blog" class="mt-14 fade-in" aria-labelledby="blog-heading">
+            <div class="flex items-center justify-between">
+                <h2 id="blog-heading" class="text-2xl font-semibold">From our Blog</h2>
+                <a href="#blog-all" class="text-sm text-slate-500">View all posts →</a>
+            </div>
+
+            <div class="mt-6 grid md:grid-cols-3 gap-6">
+                <!-- Post 1 -->
+                <article class="bg-white border rounded-lg overflow-hidden shadow-sm" tabindex="0">
+                    <img src="https://images.unsplash.com/photo-1520975917410-9fd2d9d6b6da?auto=format&fit=crop&w=800&q=60"
+                        alt="Sustainable fabrics" class="w-full h-44 object-cover" loading="lazy">
+                    <div class="p-4">
+                        <h3 class="font-semibold">Choosing Sustainable Fabrics</h3>
+                        <p class="text-sm text-slate-500 mt-2">How to pick materials that perform, look great and reduce
+                            environmental impact.</p>
+                        <div class="mt-4 text-xs text-slate-400">Sep 22, 2025 • 4 min read</div>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="bg-white border rounded-lg overflow-hidden shadow-sm" tabindex="0">
+                    <img src="https://images.unsplash.com/photo-1520975917410-9fd2d9d6b6da?auto=format&fit=crop&w=800&q=60"
+                        alt="Work uniform ideas" class="w-full h-44 object-cover" loading="lazy">
+                    <div class="p-4">
+                        <h3 class="font-semibold">Uniforms that Build Team Culture</h3>
+                        <p class="text-sm text-slate-500 mt-2">Designing corporate uniforms that employees actually want
+                            to wear.</p>
+                        <div class="mt-4 text-xs text-slate-400">Aug 10, 2025 • 3 min read</div>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="bg-white border rounded-lg overflow-hidden shadow-sm" tabindex="0">
+                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=60"
+                        alt="Activewear tips" class="w-full h-44 object-cover" loading="lazy">
+                    <div class="p-4">
+                        <h3 class="font-semibold">Activewear Care Tips</h3>
+                        <p class="text-sm text-slate-500 mt-2">Simple care steps to keep your sportswear fresh and
+                            high-performing.</p>
+                        <div class="mt-4 text-xs text-slate-400">Jul 01, 2025 • 2 min read</div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section id="gallery" class="mt-12 fade-in" aria-labelledby="gallery-heading">
+            <h2 id="gallery-heading" class="text-2xl font-semibold text-center mb-4 ">Gallery</h2>
+            <div class="flex items-center justify-between">
+
+                <div class="text-sm text-slate-500">A showcase of styles, custom branding, and real orders</div>
+                <a href="#blog-all" class="text-sm text-slate-500">View all galleries →</a>
+            </div>
+
+            <div class="mt-6 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- thumbnails -->
+                <button class="group overflow-hidden rounded-lg bg-white border p-0 focus-ring"
+                    onclick="openGallery(0)">
+                    <img src="https://images.unsplash.com/photo-1520975917410-9fd2d9d6b6da?auto=format&fit=crop&w=800&q=60"
+                        alt="Sustainable fabrics"
+                        class="w-full h-44 object-cover transition-transform group-hover:scale-105">
+                    <div class="p-3 text-sm text-slate-600">Sustainable fabrics</div>
+                </button>
+
+                <button class="group overflow-hidden rounded-lg bg-white border p-0 focus-ring"
+                    onclick="openGallery(1)">
+                    <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=800&q=60"
+                        alt="Design session"
+                        class="w-full h-44 object-cover transition-transform group-hover:scale-105">
+                    <div class="p-3 text-sm text-slate-600">Design & branding</div>
+                </button>
+
+                <button class="group overflow-hidden rounded-lg bg-white border p-0 focus-ring"
+                    onclick="openGallery(2)">
+                    <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=800&q=60"
+                        alt="Teamwear" class="w-full h-44 object-cover transition-transform group-hover:scale-105">
+                    <div class="p-3 text-sm text-slate-600">Teamwear & kits</div>
+                </button>
+
+                <button class="group overflow-hidden rounded-lg bg-white border p-0 focus-ring"
+                    onclick="openGallery(3)">
+                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=60"
+                        alt="Activewear" class="w-full h-44 object-cover transition-transform group-hover:scale-105">
+                    <div class="p-3 text-sm text-slate-600">Activewear</div>
+                </button>
+
+                <button class="group overflow-hidden rounded-lg bg-white border p-0 focus-ring"
+                    onclick="openGallery(4)">
+                    <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=60"
+                        alt="Hoodies" class="w-full h-44 object-cover transition-transform group-hover:scale-105">
+                    <div class="p-3 text-sm text-slate-600">Hoodies & streetwear</div>
+                </button>
+
+                <button class="group overflow-hidden rounded-lg bg-white border p-0 focus-ring"
+                    onclick="openGallery(5)">
+                    <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=800&q=60"
+                        alt="Joggers" class="w-full h-44 object-cover transition-transform group-hover:scale-105">
+                    <div class="p-3 text-sm text-slate-600">Comfort joggers</div>
+                </button>
+            </div>
+
+            <!-- Lightbox/modal -->
+            <div id="galleryModal" class="fixed inset-0 hidden z-50 items-center justify-center bg-black/60 p-4"
+                aria-hidden="true">
+                <div class="max-w-4xl w-full">
+                    <div class="bg-white rounded-lg overflow-hidden">
+                        <div class="relative">
+                            <button aria-label="Close gallery"
+                                class="absolute right-3 top-3 z-20 p-2 rounded-md focus-ring bg-white"
+                                onclick="closeGallery()">✕</button>
+                            <img id="galleryImg" src="" alt="Gallery image"
+                                class="w-full h-96 object-contain bg-slate-100">
+                        </div>
+                        <div class="p-4 flex items-center justify-between">
+                            <div id="galleryCaption" class="text-sm text-slate-600"></div>
+                            <div class="flex gap-2">
+                                <button class="px-3 py-1 rounded border focus-ring"
+                                    onclick="prevGallery()">Prev</button>
+                                <button class="px-3 py-1 rounded border focus-ring"
+                                    onclick="nextGallery()">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                // Gallery data and lightbox controls
+                const gallery = [
+                    { src: 'https://images.unsplash.com/photo-1520975917410-9fd2d9d6b6da?auto=format&fit=crop&w=1400&q=80', caption: 'Sustainable fabrics — options for low-impact garments' },
+                    { src: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=1400&q=80', caption: 'Design & branding sessions — prototypes and samples' },
+                    { src: 'https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=1400&q=80', caption: 'Teamwear in action — coordinated looks' },
+                    { src: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1400&q=80', caption: 'Activewear close-ups — textured materials' },
+                    { src: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=1400&q=80', caption: 'Hoodies — custom branding examples' },
+                    { src: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=1400&q=80', caption: 'Joggers — fits and finishes' }
+                ];
+                let current = 0;
+                const modal = document.getElementById('galleryModal');
+                const galleryImg = document.getElementById('galleryImg');
+                const galleryCaption = document.getElementById('galleryCaption');
+
+                function openGallery(i) {
+                    current = i; updateGallery(); modal.classList.remove('hidden'); modal.setAttribute('aria-hidden', 'false');
+                }
+                function closeGallery() { modal.classList.add('hidden'); modal.setAttribute('aria-hidden', 'true'); }
+                function updateGallery() { galleryImg.src = gallery[current].src; galleryCaption.textContent = gallery[current].caption; }
+                function prevGallery() { current = (current - 1 + gallery.length) % gallery.length; updateGallery(); }
+                function nextGallery() { current = (current + 1) % gallery.length; updateGallery(); }
+                document.addEventListener('keydown', (e) => { if (!modal.classList.contains('hidden')) { if (e.key === 'ArrowRight') nextGallery(); if (e.key === 'ArrowLeft') prevGallery(); if (e.key === 'Escape') closeGallery(); } });
+            </script>
+        </section>
+
+        <!-- Services (detailed) -->
+        <section id="services" class="mt-14 fade-in" aria-labelledby="services-heading">
+            <h2 id="services-heading" class="text-2xl font-semibold">Services</h2>
+            <p class="text-sm text-slate-500 mt-2">We offer a range of services to match different needs and budgets —
+                examples below show text + image, text + video and image + text combinations.</p>
+
+            <div class="mt-6 space-y-8">
+                <!-- Text + Image -->
+                <div class="grid md:grid-cols-2 gap-6 items-center bg-white border rounded-lg p-6">
+                    <div>
+                        <h3 class="font-semibold">Design & Branding</h3>
+                        <p class="mt-2 text-slate-600">Custom design sessions where we convert your identity into
+                            wearable branding: logos, colors, trims and tags. Ideal for schools and corporates.</p>
+                        <ul class="mt-3 text-sm text-slate-600">
+                            <li>• Logo placement and embroidery</li>
+                            <li>• Pantone color matching</li>
+                            <li>• Packaging & labeling options</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=60"
+                            alt="Design session" class="w-full h-56 object-cover rounded" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- Text + Video -->
+                <div
+                    class="grid md:grid-cols-2 gap-6 items-center bg-gradient-to-r from-cyan-50 to-emerald-50 rounded-lg p-6">
+                    <div>
+                        <h3 class="font-semibold">Production & Quality Control</h3>
+                        <p class="mt-2 text-slate-600">We manage production runs and handle QA at every stage — watch a
+                            short walkthrough of our production best practices.</p>
+                        <ul class="mt-3 text-sm text-slate-600">
+                            <li>• Sample checks</li>
+                            <li>• Size grading & fit tests</li>
+                            <li>• Ethical sourcing checks</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="aspect-w-16 aspect-h-9 bg-black rounded overflow-hidden">
+                            <video controls muted playsinline preload="metadata" class="w-full h-full object-cover">
+                                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+                                    type="video/mp4">
+                                <!-- Replace the demo video with your own production overview video -->
+                                Sorry, your browser doesn't support embedded videos.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image + Text -->
+                <div class="grid md:grid-cols-2 gap-6 items-center bg-white border rounded-lg p-6">
+                    <div class="order-2 md:order-1">
+                        <h3 class="font-semibold">Teamwear & Sports Kits</h3>
+                        <p class="mt-2 text-slate-600">High-performance uniforms, sublimation printing, and kit
+                            management for teams and schools — with optional logistics & delivery.</p>
+                        <a href="#contact"
+                            class="mt-4 inline-block rounded-md px-4 py-2 bg-emerald-600 text-white font-medium focus-ring">Get
+                            Team Quote</a>
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=800&q=60"
+                            alt="Sports team" class="w-full h-56 object-cover rounded" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="mt-14 fade-in" aria-labelledby="faq-heading">
+            <h2 id="faq-heading" class="text-2xl font-semibold">Frequently Asked Questions</h2>
+            <div class="mt-4 space-y-3">
+                <details class="bg-white border rounded-lg p-4" role="region">
+                    <summary class="font-medium">Do you accept small or one-off orders?</summary>
+                    <div class="mt-2 text-sm text-slate-600">Yes — we work with individuals as well as bulk clients.
+                        Pricing varies by volume; contact us for sample pricing.</div>
+                </details>
+
+                <details class="bg-white border rounded-lg p-4" role="region">
+                    <summary class="font-medium">Can I request sustainable materials?</summary>
+                    <div class="mt-2 text-sm text-slate-600">Absolutely. We offer organic cotton, recycled polyester,
+                        and low-impact dyeing. We'll share material specs on request.</div>
+                </details>
+
+                <details class="bg-white border rounded-lg p-4" role="region">
+                    <summary class="font-medium">What is your turnaround time?</summary>
+                    <div class="mt-2 text-sm text-slate-600">Standard production runs average 4–8 weeks depending on
+                        quantities and customization. Rush services are available for qualified orders.</div>
+                </details>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="mt-14 fade-in" aria-labelledby="contact-heading">
+            <h2 id="contact-heading" class="text-2xl font-semibold">Contact Us</h2>
+            <div class="mt-6 grid md:grid-cols-2 gap-6">
+                <div class="bg-white border rounded-lg p-6">
+                    <h3 class="font-semibold">Flexible Wear — Head Office</h3>
+                    <p class="text-sm text-slate-600 mt-2">Flexible Wear Ltd.<br>demo domain:
+                        <strong>flexiblewear.com</strong>
+                    </p>
+                    <p class="text-sm text-slate-600 mt-2">Email: <a href="mailto:hello@flexiblewear.com"
+                            class="text-emerald-600">hello@flexiblewear.com</a><br>Phone: <a href="tel:+2348000000000"
+                            class="text-emerald-600">+234 800 000 0000</a></p>
+
+                    <div class="mt-4">
+                        <h4 class="text-sm font-semibold">Follow us</h4>
+                        <div class="flex gap-3 mt-2">
+                            <a href="https://wa.me/1234567890" class="p-2 rounded-md focus-ring" aria-label="WhatsApp">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M20.52 3.48A11.82 11.82 0 0012 0a11.94 11.94 0 00-10.4 17.94L0 24l6.2-1.63A11.94 11.94 0 0012 24h.01A11.98 11.98 0 0024 12a11.82 11.82 0 00-3.48-8.52zM12 21.5a9.43 9.43 0 01-4.83-1.3l-.35-.2-3.68.97.98-3.6-.23-.37A9.43 9.43 0 1121.43 12a9.46 9.46 0 01-9.43 9.5zM17.38 14.7c-.29-.15-1.7-.84-1.97-.93s-.46-.15-.65.15-.75.93-.91 1.12-.34.22-.63.07a7.72 7.72 0 01-2.26-1.4 8.54 8.54 0 01-1.6-2.01c-.17-.3 0-.46.13-.61s.3-.34.45-.52a2 2 0 00.3-.52.54.54 0 00-.02-.52c-.07-.15-.65-1.56-.9-2.13s-.48-.48-.65-.49h-.55a1 1 0 00-.72.33 3.04 3.04 0 00-.95 2.24 5.29 5.29 0 001.1 2.81 12.1 12.1 0 004.73 4.34 11.08 11.08 0 002.72 1c1 .32 1.91.27 2.63.17a2.3 2.3 0 001.54-1.09 1.85 1.85 0 00.13-1.09c-.05-.1-.26-.16-.54-.3z" />
+                                </svg>
+                            </a>
+                            <a href="https://facebook.com/yourpage" class="p-2 rounded-md focus-ring"
+                                aria-label="Facebook">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M22.68 0H1.32A1.32 1.32 0 000 1.32v21.36A1.32 1.32 0 001.32 24H12.8v-9.29H9.69v-3.62h3.11V8.41c0-3.08 1.88-4.76 4.63-4.76 1.32 0 2.46.1 2.79.14v3.24l-1.92.01c-1.5 0-1.79.71-1.79 1.76v2.31h3.57l-.47 3.62h-3.1V24h6.08A1.32 1.32 0 0024 22.68V1.32A1.32 1.32 0 0022.68 0z" />
+                                </svg>
+                            </a>
+                            <a href="#" class="p-2 rounded-md focus-ring" aria-label="Twitter"><svg class="w-5 h-5"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19 7.5c.01.14.01.29.01.43 0 4.38-3.34 9.42-9.42 9.42A9.36 9.36 0 019 17.9v.01A6.7 6.7 0 016.2 16c-.9-.54-1.6-1.25-2.26-2.16A6.63 6.63 0 006 16.7c-1.14-.1-2.21-.35-3.18-.86C3.12 13.96 5.63 12 8.7 12c-.1-.49-.16-.99-.16-1.51 0-2.76 2.24-5 5-5 1.43 0 2.72.6 3.64 1.56 1.13-.22 2.2-.63 3.16-1.2-.37 1.17-1.16 2.15-2.2 2.77a9.3 9.3 0 002.66-.72 9.27 9.27 0 01-2.34 2.4z" />
+                                </svg></a>
+                            <a href="#" class="p-2 rounded-md focus-ring" aria-label="Instagram"><svg class="w-5 h-5"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zM12 8.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zM17.9 6.1a1.1 1.1 0 11-2.2 0 1.1 1.1 0 012.2 0z" />
+                                </svg></a>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 text-xs text-slate-400">Note: This demo includes a contact form (client-side). For
+                        production, configure server-side handling and deploy over HTTPS (TLS/SSL) to protect user data.
+                    </div>
+                </div>
+
+                <form id="contactForm" class="bg-white border rounded-lg p-6 space-y-4"
+                    action="mailto:hello@flexiblewear.com" method="post" onsubmit="return handleContactSubmit(event)">
+                    <label class="block">
+                        <span class="text-sm font-medium">Your name</span>
+                        <input name="name" required
+                            class="mt-1 block w-full rounded-md border px-3 py-2 focus:ring-2 focus:ring-emerald-200"
+                            placeholder="Jane Doe">
+                    </label>
+                    <label class="block">
+                        <span class="text-sm font-medium">Email</span>
+                        <input type="email" name="email" required
+                            class="mt-1 block w-full rounded-md border px-3 py-2 focus:ring-2 focus:ring-emerald-200"
+                            placeholder="you@example.com">
+                    </label>
+                    <label class="block">
+                        <span class="text-sm font-medium">Message</span>
+                        <textarea name="message" rows="4" required
+                            class="mt-1 block w-full rounded-md border px-3 py-2 focus:ring-2 focus:ring-emerald-200"
+                            placeholder="Tell us about your project..."></textarea>
+                    </label>
+                    <div class="flex items-center gap-3">
+                        <button type="submit"
+                            class="rounded-md px-4 py-2 bg-emerald-600 text-white font-medium focus-ring">Send
+                            Message</button>
+                        <button type="reset" class="rounded-md px-3 py-2 border focus-ring">Reset</button>
+                    </div>
+                    <div id="contactMsg" class="text-sm text-slate-500" role="status" aria-live="polite"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Small sitemap & accessibility notes -->
+        <section class="mt-12 text-sm text-slate-500">
+            <h4 class="font-semibold">Site map & accessibility</h4>
+            <p class="mt-2">This single-file demo presents the core pages: Home, Services, Blog, FAQ and Contact.
+                Semantic markup, keyboard focus styles and high-contrast text ensure better accessibility. For
+                production, provide server-side sitemap.xml and ARIA labeling for complex widgets.</p>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 border-t">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="md:flex md:justify-between md:items-start gap-6">
+                <div class="flex items-start gap-3">
+                    <svg class="w-10 h-10 rounded-lg p-1 bg-gradient-to-br from-emerald-700 to-cyan-500 text-white"
+                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect width="24" height="24" rx="6" fill="url(#g2)" />
+                        <defs>
+                            <linearGradient id="g2" x1="0" x2="1">
+                                <stop offset="0" stop-color="#059669" />
+                                <stop offset="1" stop-color="#06b6d4" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M7 16c0-2.5 2-4 5-4s5 1.5 5 4" stroke="white" stroke-width="1.4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <div>
+                        <div class="font-semibold">Flexible Wear</div>
+                        <div class="text-xs text-slate-500">flexiblewear.com</div>
+                    </div>
+                </div>
+
+                <div class="mt-6 md:mt-0 grid grid-cols-2 sm:grid-cols-4 gap-6">
+                    <div>
+                        <h5 class="font-semibold">Product</h5>
+                        <ul class="mt-2 text-sm text-slate-600 space-y-1">
+                            <li><a href="#" class="hover:underline">Cardigans</a></li>
+                            <li><a href="#" class="hover:underline">Joggers</a></li>
+                            <li><a href="#" class="hover:underline">Hoodies</a></li>
+                            <li><a href="#" class="hover:underline">Sportswear</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="font-semibold">Company</h5>
+                        <ul class="mt-2 text-sm text-slate-600 space-y-1">
+                            <li><a href="#about" class="hover:underline">About</a></li>
+                            <li><a href="#services" class="hover:underline">Services</a></li>
+                            <li><a href="#blog" class="hover:underline">Blog</a></li>
+                            <li><a href="#contact" class="hover:underline">Contact</a></li>
+                            <li><a href="#gallery" class="hover:underline">Gallery</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h5 class="font-semibold">Support</h5>
+                        <ul class="mt-2 text-sm text-slate-600 space-y-1">
+                            <li><a href="#faq" class="hover:underline">FAQ</a></li>
+                            <li><a href="#" class="hover:underline">Returns</a></li>
+                            <li><a href="#" class="hover:underline">Privacy</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h5 class="font-semibold">Legal</h5>
+                        <ul class="mt-2 text-sm text-slate-600 space-y-1">
+                            <li><a href="#" class="hover:underline">Terms</a></li>
+                            <li><a href="#" class="hover:underline">Cookies</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-xs text-slate-400">© <span id="year"></span> Flexible Wear. All rights reserved.
+                Hosted over HTTPS is required for security and form submissions.</div>
+        </div>
+    </footer>
+
+    <!-- Search modal (simple client-side) -->
+    <div id="searchModal" class="fixed inset-0 hidden z-50 items-start pt-24 justify-center bg-black/40" role="dialog"
+        aria-modal="true">
+        <div class="w-full max-w-xl p-6 bg-white rounded-lg shadow-lg">
+            <div class="flex items-center gap-3">
+                <input id="searchInput" aria-label="Search site content"
+                    class="w-full rounded-md border px-3 py-2 focus:ring-2 focus:ring-emerald-200"
+                    placeholder="Search blog posts, products, services...">
+                <button id="searchClose" class="p-2 rounded-md focus-ring" aria-label="Close search">Close</button>
+            </div>
+            <div id="searchResults" class="mt-4 grid gap-3"></div>
+        </div>
+    </div>
+
+    <script>
+        // Simple interactive behaviors: mobile menu, search modal, contact form
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+            menuBtn.setAttribute('aria-expanded', String(!expanded));
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Search modal
+        const searchBtn = document.getElementById('searchBtn');
+        const searchModal = document.getElementById('searchModal');
+        const searchClose = document.getElementById('searchClose');
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        searchBtn.addEventListener('click', () => { searchModal.classList.remove('hidden'); searchInput.focus(); });
+        searchClose.addEventListener('click', () => { searchModal.classList.add('hidden'); searchInput.value = ''; searchResults.innerHTML = ''; });
+        searchModal.addEventListener('click', (e) => { if (e.target === searchModal) { searchModal.classList.add('hidden'); } });
+
+        // Demo content index for search (in production, use server-side search)
+        const index = [
+            { type: 'post', title: 'Choosing Sustainable Fabrics', href: '#blog', excerpt: 'How to pick materials that perform and reduce environmental impact.' },
+            { type: 'post', title: 'Uniforms that Build Team Culture', href: '#blog', excerpt: 'Designing corporate uniforms employees want to wear.' },
+            { type: 'post', title: 'Activewear Care Tips', href: '#blog', excerpt: 'Keep your sportswear fresh and high-performing.' },
+            { type: 'service', title: 'Design & Branding', href: '#services', excerpt: 'Logo placement, pantone matching, packaging.' },
+            { type: 'service', title: 'Production & Quality Control', href: '#services', excerpt: 'Sample checks, fit tests and sourcing.' },
+        ];
+
+        searchInput.addEventListener('input', (e) => {
+            const q = e.target.value.trim().toLowerCase();
+            searchResults.innerHTML = '';
+            if (!q) return;
+            const results = index.filter(i => (i.title + ' ' + i.excerpt).toLowerCase().includes(q));
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="text-sm text-slate-500">No results</div>';
+                return;
+            }
+            results.slice(0, 8).forEach(r => {
+                const el = document.createElement('a');
+                el.href = r.href;
+                el.className = 'block p-3 rounded hover:bg-slate-50';
+                el.innerHTML = `<div class="text-sm font-semibold">${r.title}</div><div class="text-xs text-slate-500">${r.excerpt}</div>`;
+                el.addEventListener('click', () => searchModal.classList.add('hidden'));
+                searchResults.appendChild(el);
+            });
+        });
+
+        // Contact form: basic client-side handling (demo)
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const f = e.target;
+            const name = f.name.value.trim();
+            const email = f.email.value.trim();
+            const message = f.message.value.trim();
+            const status = document.getElementById('contactMsg');
+            if (!name || !email || !message) { status.textContent = 'Please fill all fields.'; return false; }
+
+            // In production: send to a server endpoint or use a service (Formspree, Netlify Forms, etc.)
+            status.textContent = 'Thanks! Your message has been noted. We will contact you shortly.';
+            f.reset();
+            return false;
+        }
+
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Accessibility: focus trap simple approach for search modal (tab handling)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (!searchModal.classList.contains('hidden')) {
+                    searchModal.classList.add('hidden');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
